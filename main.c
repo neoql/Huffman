@@ -3,16 +3,29 @@
 //
 
 #include <stdio.h>
+#include <string.h>
 #include "Huffman.h"
 
 
 int main(int argc, char *argv[])
 {
-    HuffmanTree tab;
-    uchar array[5] = {5, 5, 5, 2, 1};
-    int i;
+    Tree tree;
+    char str[] = "Hello World";
+    uchar *s;
+    BOOL bits[] = {1,1,1,1,0,
+                   1,0,1,0,1,
+                   0,1,1,0,1,
+                   1,1,0,0,0,
+                   0,1,1,0,0,
+                   1,1,1,0,0,
+                   0,1};
 
-    tab = create_encode_tab(array, 5);
+    tree = HuffmanTree((uchar *const) str, (int) strlen(str));
+
+    ShowCodeTab(tree);
+    s = decode(bits, 37, tree);
+    printf("%s\n", s);
+    DeleteTree(tree);
 
     return 0;
 }

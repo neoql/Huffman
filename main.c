@@ -3,22 +3,16 @@
 //
 
 #include <stdio.h>
-#include "bitarray.h"
+#include "Huffman.h"
 
 
 int main(int argc, char *argv[])
 {
-    bitarray str;
+    HuffmanTree tab;
+    uchar array[5] = {5, 5, 5, 2, 1};
+    int i;
 
-    str = BitArray();
-
-    AppendBin(str, 1);
-    AppendBin(str, 1);
-    AppendBin(str, 0);
-    AppendBin(str, 1);
-
-    printf("%d\n", str->bytes[0]);
-    DeleteBitArray(str);
+    tab = create_encode_tab(array, 5);
 
     return 0;
 }

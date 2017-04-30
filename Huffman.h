@@ -5,21 +5,25 @@
 #ifndef HUFFMAN_HUFFMAN_H
 #define HUFFMAN_HUFFMAN_H
 
-#define KeyType uchar
+#define Key uchar
+#define TAB_MAX_SIZE 256
 
 typedef char bool;
 typedef unsigned char uchar;
 
-typedef struct _TreeNode *TreeNode;
+typedef struct _Leaf *Leaf;
+typedef struct _Leaf **HuffmanTree;
 
 
-struct _TreeNode {
-    bool real;
+struct _Leaf {
     int weight;
-    TreeNode parent;
-    TreeNode left;
-    TreeNode right;
-    KeyType value;
+    Leaf parent;
+    Leaf left;
+    Leaf right;
+    Key value;
 };
+
+
+extern HuffmanTree create_encode_tab(const uchar *p_str, int length);
 
 #endif //HUFFMAN_HUFFMAN_H

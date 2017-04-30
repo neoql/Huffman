@@ -12,18 +12,18 @@ typedef char bool;
 typedef unsigned char uchar;
 
 typedef struct _Leaf *Leaf;
-typedef struct _Leaf **HuffmanTree;
+typedef struct _Leaf *Tree;
 
 
 struct _Leaf {
     int weight;
     Leaf parent;
-    Leaf left;
-    Leaf right;
+    Leaf lchild;
+    Leaf rchild;
     Key value;
 };
 
 
-extern HuffmanTree create_encode_tab(const uchar *p_str, int length);
+extern Tree HuffmanTree(uchar *const str, int length);
 
 #endif //HUFFMAN_HUFFMAN_H

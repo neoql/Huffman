@@ -19,7 +19,7 @@ SortList CreateSortList()
 }
 
 
-void Append2SortList(SortList list, Ele leaf)
+void Append2SortList(SortList list, Leaf leaf)
 {
     Node *node, last, temp;
 
@@ -63,16 +63,16 @@ void DeleteList(SortList list)
 }
 
 
-Ele PopMin(SortList list)
+Leaf PopMin(SortList list)
 {
-    Ele ele;
+    Leaf leaf;
     Node node;
 
     node = list->next;
     list->next = node->next;
-    ele = node->leaf;
+    leaf = node->leaf;
     free(node);
     list->length--;
 
-    return ele;
+    return leaf;
 }

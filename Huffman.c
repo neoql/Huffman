@@ -7,14 +7,17 @@
 #include "sortlist.h"
 
 
+#define MAX_LEN 256
+
+
 static Leaf MergeNode(Leaf left, Leaf right)
 {
     Leaf node;
 
     node = malloc(sizeof(struct _Leaf));
     node->parent = NULL;
-    node->left = left;
-    node->right = right;
+    node->lchild = left;
+    node->rchild = right;
     node->weight = left->weight + right->weight;
 
     left->parent = node;
@@ -25,42 +28,41 @@ static Leaf MergeNode(Leaf left, Leaf right)
 }
 
 
-HuffmanTree create_encode_tab(const uchar *p_str, int length)
+Tree HuffmanTree(uchar *const str, int length)
 {
-    int i;
-    HuffmanTree tree;
+    int weights[MAX_LEN], weight;
+    Tree tree;
+    Leaf leaf, left, right;
     SortList list;
-    Leaf left, right, node;
-    int key;
-
-    tree = malloc(sizeof(Leaf) * TAB_MAX_SIZE);
-    for (i = 0; i < TAB_MAX_SIZE; i++) {
-        tree[i] = malloc(sizeof(struct _Leaf));
-        tree[i]->parent = NULL;
-        tree[i]->left = NULL;
-        tree[i]->right = NULL;
-        tree[i]->value = (uchar) i;
-        tree[i]->weight = 0;
-    }
+    int i, k;
 
     for (i = 0; i < length; i++) {
-        key = p_str[i];
-        tree[key]->weight++;
+        k = str[i];
+        weight = weights[k];
+        weights[k] = weight + 1;
     }
 
     list = CreateSortList();
-    for (i = 0; i < TAB_MAX_SIZE; i++) {
-        if (tree[i]->weight != 0) {
-            Append2SortList(list, tree[i]);
+    for (i = 0; i < MAX_LEN; i++) {
+        if (weights[i]) {
+            leaf = malloc(sizeof(struct _Leaf));
+            leaf->parent = NULL;
+            leaf->lchild = NULL;
+            leaf->rchild = NULL;
+            leaf->weight = weights[i];
+            leaf->value = (uchar) i;
+            Append2SortList(list, leaf);
         }
     }
 
     while (list->length > 1) {
         left = PopMin(list);
         right = PopMin(list);
-        node = MergeNode(left, right);
-        Append2SortList(list, node);
+        leaf = MergeNode(left, right);
+        Append2SortList(list, leaf);
     }
+    tree = PopMin(list);
+    DeleteList(list);
 
     return tree;
 }

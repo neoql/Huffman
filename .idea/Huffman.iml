@@ -7,9 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/main.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Huffman.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/sortlist.c" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/bitarray.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Huffman.c" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/bitarray.c" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
